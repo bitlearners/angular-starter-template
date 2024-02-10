@@ -1,0 +1,75 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <h2>Bit Learners</h2>
+    </a>
+  </div>
+</nav>
+<div class="container-fluid mt-2" >
+  <h2 class="text-center mb-4">Practical 1 - Order Form </h2>
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="card border-primary mb-4">
+        <div class="card-header bg-primary text-white">Your Cart</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Sr.</th>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img src="{{ product.img }}" alt="{{ product.name }}" width="50" height="50" class="me-2 rounded">
+                      <span>{{ product.name }}</span>
+                    </div>
+                  </td>
+                  <td>₹{{ product.price }}</td>
+                  <td>
+                    <input class="form-control" type="number" [(ngModel)]="product.quantity" (input)="calculateTotal(product)">
+                  </td>
+                  <td>₹{{ product.quantity * product.price }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card border-success mb-4 " >
+        <div class="card-header bg-success text-white">Summary</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td class="fw-bold">Total Price (Before GST):</td>
+                  <td class="fw-bold">₹{{ totalPrice }}</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">GST ({{ gstRate * 100 }}%):</td>
+                  <td>₹{{ gst }}</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">Total Amount (After GST):</td>
+                  <td>₹{{ totalAmount }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
